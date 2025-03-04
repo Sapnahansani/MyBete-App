@@ -14,7 +14,7 @@ class DonotHaveDiabeteDashboard extends StatelessWidget {
         ),
       ),
       body: Center(
-        child: Text("Welcome to the don't have Diabetes Dashboard"),
+        child: Text("Welcome to the don't have Diagit checkoutbetes Dashboard"),
       ),
     );
   }
