@@ -66,20 +66,226 @@ class ExerciseDashboard extends StatelessWidget {
     );
     
     return Scaffold(
-      appBar: AppBar(title: const Text('Fitness Program')),
-      body: GridView.builder(
-        padding: const EdgeInsets.all(16),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 16,
-          mainAxisSpacing: 16,
-          childAspectRatio: 1.2,
+      backgroundColor: Colors.grey[50],
+      extendBodyBehindAppBar: true,
+      appBar: _buildAppBar(),
+      body: SafeArea(
+        top: false,
+        child: Column(
+          children: [
+            _buildHeader(),
+            Expanded(
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: [
+                  _buildStatistics(),
+                  _buildCategoriesSection(),
+                ],
+              ),
+            ),
+          ],
         ),
-        itemCount: categories.length,
-        itemBuilder: (context, index) => ExerciseCategoryCard(
-          category: categories[index],
-          onTap: () => _navigateToExercise(context, categories[index]),
+      ),
+    );
+  }
+
+  PreferredSizeWidget _buildAppBar() {
+    return AppBar(
+      elevation: 0,
+      backgroundColor: Colors.transparent,
+      systemOverlayStyle: SystemUiOverlayStyle.light,
+      title: Padding(
+        padding: const EdgeInsets.only(left: 50.5),
+        child: Text(
+          'Fitness Tracker',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+            fontSize: 30,
+          ),
         ),
+      ),
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.notifications_outlined, color: Colors.white),
+          onPressed: () {},
+        ),
+        IconButton(
+          icon: const Icon(Icons.person_outline, color: Colors.white),
+          onPressed: () {},
+        ),
+      ],
+    );
+  }
+
+  Widget _buildHeader() {
+  return Container(
+    height: 250,
+    decoration: BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [primaryBlue, darkBlue],
+      ),
+      boxShadow: [
+        BoxShadow(
+          color: darkBlue.withOpacity(0.4),
+          blurRadius: 10,
+          offset: const Offset(0, 4),
+        ),
+      ],
+    ),
+    child: Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(
+            'Welcome to Fitness Tracker!',
+            style: TextStyle(
+              fontSize: 26,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+          const SizedBox(height: 8),
+          const Text(
+            'Your journey to a healthier, stronger, and more active life starts here.',
+            textAlign: TextAlign.center, 
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.white70,
+
+            ),
+          ),
+          const SizedBox(height: 4),
+          const Text(
+            'Track your workouts, stay motivated, and achieve your fitness goals — one step at a time!',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.white70,
+              
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+  Widget _buildStatistics() {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(20, 10, 20, 20),
+      padding: const EdgeInsets.symmetric(vertical:20 , horizontal: 20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 10,
+            spreadRadius: 1,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          _buildStatItem(totalWorkouts.toString(), 'Workouts', Icons.fitness_center),
+          _buildDivider(),
+          _buildStatItem('$streakDays days', 'Streak', Icons.local_fire_department),
+          _buildDivider(),
+          _buildStatItem('$totalMinutes min', 'Total Time', Icons.timer),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStatItem(String value, String label, IconData icon) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Icon(icon, size: 16, color: primaryBlue),
+            const SizedBox(width: 4),
+            Text(
+              value,
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: darkBlue,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 6),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 14,
+            color: Colors.grey[600],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDivider() {
+    return Container(
+      height: 50,
+      width: 5,
+      color: Colors.grey[300],
+    );
+  }
+
+  Widget _buildCategoriesSection() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 8,
+                height: 20,
+                decoration: BoxDecoration(
+                  color: primaryBlue,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Text(
+                'Workout Categories',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: darkBlue,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 16,
+              mainAxisSpacing: 16,
+              childAspectRatio: 0.85,
+            ),
+            itemCount: categories.length,
+            itemBuilder: (context, index) => ExerciseCategoryCard(
+              category: categories[index],
+              onTap: () => _navigateToExercise(context, categories[index]),
+            ),
+          ),
+          const SizedBox(height: 40),
+        ],
       ),
     );
   }
@@ -379,5 +585,9 @@ class PatternPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> fitness
