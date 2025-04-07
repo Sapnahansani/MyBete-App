@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
+
 class StepCounterPage extends StatefulWidget {
   const StepCounterPage({super.key});
 

@@ -151,7 +151,7 @@ class ExerciseDashboard extends StatelessWidget {
           const SizedBox(height: 8),
           const Text(
             'Your journey to a healthier, stronger, and more active life starts here.',
-            textAlign: TextAlign.center, 
+            textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16,
               color: Colors.white70,
