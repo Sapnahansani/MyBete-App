@@ -446,4 +446,3 @@ class WorkoutVideo {
     required this.difficulty,
   });
 }
-
