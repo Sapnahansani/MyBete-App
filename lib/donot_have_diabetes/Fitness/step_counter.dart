@@ -293,7 +293,7 @@ class _StepCounterPageState extends State<StepCounterPage>
             'and reduces health risks. Aim for at least 10,000 steps daily '
             'to boost cardiovascular health and improve overall fitness.',
             style: TextStyle(
-              fontSize: 14,
+              fontSize: 15,
               height: 1.5,
               color: Colors.grey.shade700,
             ),
