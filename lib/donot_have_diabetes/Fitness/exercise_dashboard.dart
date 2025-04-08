@@ -120,83 +120,64 @@ class ExerciseDashboard extends StatelessWidget {
   }
 
   Widget _buildHeader() {
-    return Container(
-      height: 200,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            primaryBlue,
-            darkBlue,
-          ],
+  return Container(
+    height: 250,
+    decoration: BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [primaryBlue, darkBlue],
+      ),
+      boxShadow: [
+        BoxShadow(
+          color: darkBlue.withOpacity(0.4),
+          blurRadius: 10,
+          offset: const Offset(0, 4),
         ),
-        boxShadow: [
-          BoxShadow(
-            color: darkBlue.withOpacity(0.4),
-            blurRadius: 20,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Stack(
+      ],
+    ),
+    child: Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Background pattern
-          Positioned.fill(
-            child: Opacity(
-              opacity: 0.1,
-              child: CustomPaint(
-                painter: PatternPainter(),
-              ),
+          const Text(
+            'Welcome to Fitness Tracker!',
+            style: TextStyle(
+              fontSize: 26,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
             ),
           ),
-          // Content
-          SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 5),
-                  const Text(
-                    'Welcome Back!',
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'HI Continue your fitness journey today!!!!',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.white.withOpacity(0.9),
-                    ),
-                  ),
-                ],
-              ),
+          const SizedBox(height: 8),
+          const Text(
+            'Your journey to a healthier, stronger, and more active life starts here.',
+            textAlign: TextAlign.center, 
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.white70,
+
             ),
           ),
-          // Wave bottom
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: CustomPaint(
-              painter: WavePainter(color: Colors.white),
-              child: const SizedBox(height: 20),
+          const SizedBox(height: 4),
+          const Text(
+            'Track your workouts, stay motivated, and achieve your fitness goals — one step at a time!',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.white70,
+              
             ),
           ),
         ],
       ),
-    );
-  }
+    ),
+  );
+}
 
   Widget _buildStatistics() {
     return Container(
       margin: const EdgeInsets.fromLTRB(20, 10, 20, 20),
-      padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
+      padding: const EdgeInsets.symmetric(vertical:20 , horizontal: 20),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
@@ -605,4 +586,3 @@ class PatternPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
-
