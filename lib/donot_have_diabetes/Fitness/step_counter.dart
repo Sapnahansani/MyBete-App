@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import 'package:flutter/material.dart';
+=======
+mport 'package:flutter/material.dart';
+>>>>>>> 77b0e99c106b674a6350d9b40854320c8ea94e5b
 import 'dart:math' as math;
 
 class StepCounterPage extends StatefulWidget {
@@ -231,6 +235,33 @@ class _StepCounterPageState extends State<StepCounterPage>
             offset: const Offset(0, 2),
           ),
         ],
+<<<<<<< HEAD
+      ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(icon, color: primaryBlue, size: 20),
+              const SizedBox(width: 8),
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.grey.shade600,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            value,
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: darkBlue,
+=======
       ),
       child: Column(
         children: [
@@ -263,6 +294,154 @@ class _StepCounterPageState extends State<StepCounterPage>
     );
   }
 
+  Widget _buildIntroductionSection() {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: lightBlue.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.directions_walk, color: primaryBlue),
+              const SizedBox(width: 8),
+              Text(
+                'Walk Your Way to Health',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: darkBlue,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Text(
+            'Tracking your daily steps helps maintain an active lifestyle '
+            'and reduces health risks. Aim for at least 10,000 steps daily '
+            'to boost cardiovascular health and improve overall fitness.',
+            style: TextStyle(
+              fontSize: 14,
+              height: 1.5,
+              color: Colors.grey.shade700,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStartButton() {
+    return Container(
+      width: double.infinity,
+      height: 56,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [primaryBlue, accentColor],
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+        ),
+        borderRadius: BorderRadius.circular(28),
+        boxShadow: [
+          BoxShadow(
+            color: primaryBlue.withOpacity(0.3),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(28),
+          onTap: _startTracking,
+          child: Center(
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(
+                  Icons.directions_walk,
+                  color: Colors.white,
+                  size: 24,
+                ),
+                const SizedBox(width: 12),
+                const Text(
+                  'START TRACKING',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _startTracking() {
+    setState(() {
+      _steps += 1000;
+      // Update the animation to reflect the new step count
+      _progressAnimation = Tween<double>(
+        begin: _progressAnimation.value,
+        end: _steps / _dailyGoal,
+      ).animate(CurvedAnimation(
+        parent: _controller,
+        curve: Curves.easeOutCubic,
+      ));
+      _controller.forward(from: 0);
+    });
+  }
+
+  void _showInfoDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        title: Row(
+          children: [
+            Icon(Icons.info, color: primaryBlue),
+            const SizedBox(width: 8),
+            const Text('How to Use'),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildInfoItem(1, 'Carry your phone in your pocket or bag'),
+            const SizedBox(height: 8),
+            _buildInfoItem(2, 'Walk normally throughout the day'),
+            const SizedBox(height: 8),
+            _buildInfoItem(3, 'Check progress periodically'),
+            const SizedBox(height: 8),
+            _buildInfoItem(4, 'Aim for your daily goal'),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(
+              'CLOSE',
+              style: TextStyle(color: primaryBlue),
+>>>>>>> 77b0e99c106b674a6350d9b40854320c8ea94e5b
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+<<<<<<< HEAD
   Widget _buildIntroductionSection() {
     return Container(
       padding: const EdgeInsets.all(20),
@@ -446,6 +625,42 @@ class _StepCounterPageState extends State<StepCounterPage>
   }
 }
 
+=======
+  Widget _buildInfoItem(int number, String text) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          width: 24,
+          height: 24,
+          decoration: BoxDecoration(
+            color: primaryBlue,
+            shape: BoxShape.circle,
+          ),
+          child: Center(
+            child: Text(
+              number.toString(),
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: Text(
+            text,
+            style: const TextStyle(fontSize: 14, height: 1.5),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+>>>>>>> 77b0e99c106b674a6350d9b40854320c8ea94e5b
 // Custom painter for the progress arc
 class ProgressArcPainter extends CustomPainter {
   final double progress;
@@ -479,5 +694,9 @@ class ProgressArcPainter extends CustomPainter {
         oldDelegate.color != color ||
         oldDelegate.strokeWidth != strokeWidth;
   }
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> 77b0e99c106b674a6350d9b40854320c8ea94e5b

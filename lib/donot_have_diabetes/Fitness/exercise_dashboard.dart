@@ -585,4 +585,9 @@ class PatternPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+<<<<<<< HEAD
 }
+=======
+}
+
+>>>>>>> 77b0e99c106b674a6350d9b40854320c8ea94e5b
